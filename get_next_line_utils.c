@@ -6,7 +6,7 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 18:59:57 by jodehii           #+#    #+#             */
-/*   Updated: 2026/08/31 19:07:50 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/03 17:57:43 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,32 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	return (s2);
+}
+
+char	*ft_strjoin(const char *s1, const char *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+	char	*join;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!join)
+		return (NULL);
+	while (s1[i])
+	{
+		join[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		join[i + j] = s2[j];
+		j++;
+	}
+	join[i + j] = '\0';
+	return (join);
 }
