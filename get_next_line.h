@@ -6,7 +6,7 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 23:59:54 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/04 17:43:10 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 20:51:25 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include <fcntl.h>
 # include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*read_basket(int fd, char *basket);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s1);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
 
 #endif

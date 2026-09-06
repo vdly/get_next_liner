@@ -6,7 +6,7 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/05 22:49:09 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 00:31:13 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 19:25:05 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ char	*read_basket(int fd, char *basket)
 	int		apples_read;
 
 	spare_basket = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	apples_read = read(fd, spare_basket, BUFFER_SIZE);
 	if (!spare_basket)
-		return (NULL);
+		return (NULL);	
+	apples_read = read(fd, spare_basket, BUFFER_SIZE);
 	while (*basket && !ft_strchr(basket, '\n'))
 	{
 		apples_read = read(fd, spare_basket, BUFFER_SIZE);
@@ -148,4 +148,69 @@ char	*read_basket(int fd, char *basket)
 		return (NULL);
 	}
 	return (basket);
+}
+
+
+// pls chill this is extra apples implementation
+
+char	*get_apples(int fd, char *basket)
+{
+	char	*temp_basket;
+	char	*apples;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	temp_basket = basket;
+	while (temp_basket[i])
+	{
+		if (temp_basket[i] == '\n')
+		{
+			break ;
+			i++;
+		}
+		i++;
+	}
+	apples = malloc(sizeof(char) * (i + 1));
+	if (!apples)
+		return (NULL);
+	while (j <= i)
+	{
+		apples[j] = temp_basket[j];
+		j++;
+	}
+	apples[j] = '\0';
+	return (apples);
+}
+
+char	*get_apples(int fd, char *basket)
+{
+	char	*temp_basket;
+	char	*apples;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	temp_basket = basket;
+	while (temp_basket[i])
+	{
+		if (temp_basket[i] == '\n')
+		{
+			break ;
+			i++;
+		}
+		i++;
+	}
+	apples = malloc(sizeof(char) * (i + 1));
+	if (!apples)
+		return (NULL);
+	while (j <= i)
+	{
+		apples[j] = temp_basket[j];
+		j++;
+	}
+	apples[j] = '\0';
+	return (apples);
 }

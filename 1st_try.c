@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2ver_gnl.c                                         :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/06 19:29:34 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 21:01:48 by jodehii          ###   ########.fr       */
+/*   Created: 2026/08/29 23:58:21 by jodehii           #+#    #+#             */
+/*   Updated: 2026/09/06 19:28:27 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ char	*read_basket(int fd, char *basket)
 	int		apples_read;
 
 	spare_basket = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	apples_read = read(fd, spare_basket, BUFFER_SIZE);
 	if (!spare_basket)
 		return (NULL);
-	apples_read = read(fd, spare_basket, BUFFER_SIZE);
-	while (apples_read > 0)
+	while (*basket && !ft_strchr(basket, '\n'))
 	{
+		apples_read = read(fd, spare_basket, BUFFER_SIZE);
+		if (apples_read <= 0)
+			break ;
 		spare_basket[apples_read] = '\0';
 		temp_basket = ft_strjoin(basket, spare_basket);
 		free(basket);
 		basket = temp_basket;
-		if (!ft_strchr(basket, '\n'))
-			break ;
-		apples_read = read(fd, spare_basket, BUFFER_SIZE);
 	}
 	free (spare_basket);
 	if (apples_read < 0)
@@ -42,24 +42,31 @@ char	*read_basket(int fd, char *basket)
 }
 
 
-char	*get_apples(char *basket)
+char	*get_apples(int fd, char *basket)
 {
+	char	*temp_basket;
 	char	*apples;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	while (basket[i] && basket[i] != '\n')
+	temp_basket = basket;
+	while (temp_basket[i])
+	{
+		if (temp_basket[i] == '\n')
+		{
+			break ;
+			i++;
+		}
 		i++;
-	if (basket[i] == '\n')
-		i++;
+	}
 	apples = malloc(sizeof(char) * (i + 1));
 	if (!apples)
 		return (NULL);
-	while (j < i)
+	while (j <= i)
 	{
-		apples[j] = basket[j];
+		apples[j] = temp_basket[j];
 		j++;
 	}
 	apples[j] = '\0';
@@ -76,15 +83,20 @@ char	*extra_apples(char *basket)
 	j = 0;
 	while (basket[i] != '\n' && basket[i])
 		i++;
-	if (basket[i] == '\n')
-		i++;
 	extra_apples = malloc(sizeof(char) * (ft_strlen(basket) - i));
 	if (!extra_apples)
 	{
 		free (basket);
 		return (NULL);
 	}
-	extra_apples = ft_substr(basket, i, ft_strlen(basket) - i);
+	if (basket[i] == '\n')
+		i++;
+	while (extra_apples[j])
+	{
+		extra_apples[j] = basket[j + i];
+		j++;
+	}
+	extra_apples[j] = 0;
 	free (basket);
 	return (extra_apples);
 }
@@ -94,24 +106,14 @@ char	*get_next_line(int fd)
 	static char	*basket;
 	char		*apples;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (!fd || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!basket)
-	{
-		basket = ft_strdup("");
-		if (!basket)
-			return (NULL);
-	}
+		return (ft_strdup(""));
 	basket = read_basket(fd, basket);
 	if (!basket)
 		return (NULL);
-	if (basket[0] == '\0')
-	{
-		free(basket);
-		basket = NULL;
-		return (NULL);
-	}
-	apples = get_apples(basket);
+	apples = get_apples(fd, basket);
 	basket = extra_apples(basket);
 	return (apples);
 }
