@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2ver_gnl.c                                         :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 19:29:34 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 21:01:48 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:22:27 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,12 @@ char	*extra_apples(char *basket)
 	j = 0;
 	while (basket[i] != '\n' && basket[i])
 		i++;
-	if (basket[i] == '\n')
-		i++;
-	extra_apples = malloc(sizeof(char) * (ft_strlen(basket) - i));
-	if (!extra_apples)
+	if (!basket[i])
 	{
-		free (basket);
+		free(basket);
 		return (NULL);
 	}
+	i++;
 	extra_apples = ft_substr(basket, i, ft_strlen(basket) - i);
 	free (basket);
 	return (extra_apples);

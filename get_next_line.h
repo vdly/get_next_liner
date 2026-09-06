@@ -6,7 +6,7 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 23:59:54 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 20:51:25 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:23:52 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-char	*get_next_line(int fd);
 char	*read_basket(int fd, char *basket);
+char	*get_apples(char *basket);
+char	*extra_apples(char *basket);
+char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
+void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
