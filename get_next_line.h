@@ -6,7 +6,7 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 23:59:54 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 21:23:52 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 22:28:32 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 128
 # endif
 
 # include <unistd.h>
@@ -27,6 +27,7 @@ char	*read_basket(int fd, char *basket);
 char	*get_apples(char *basket);
 char	*extra_apples(char *basket);
 char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);

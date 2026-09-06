@@ -6,11 +6,29 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 19:29:34 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 21:22:27 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:42:29 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (c == 0)
+		return ((char *)s + i);
+	return (0);
+}
 
 char	*read_basket(int fd, char *basket)
 {

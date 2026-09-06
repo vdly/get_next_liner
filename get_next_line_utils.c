@@ -6,28 +6,20 @@
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 18:59:57 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/06 20:53:41 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/06 22:21:15 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
 		i++;
-	}
-	if (c == 0)
-		return ((char *)s + i);
-	return (0);
+	return (i);
 }
 
 char	*ft_strdup(const char *s1)
@@ -52,7 +44,7 @@ char	*ft_strdup(const char *s1)
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*space;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	if (size > 0 && count > SIZE_MAX / size)
@@ -60,7 +52,7 @@ void	*ft_calloc(size_t count, size_t size)
 	space = malloc(count * size);
 	if (!space)
 		return (NULL);
-	while (((unsigned char *)space)[i])
+	while (i < (size * count))
 	{
 		((unsigned char *)space)[i] = 0;
 		i++;
@@ -97,7 +89,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
-	char	*str;
 	char	*join;
 
 	i = 0;
