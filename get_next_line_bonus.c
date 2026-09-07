@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodehii <jodehii@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 19:29:34 by jodehii           #+#    #+#             */
-/*   Updated: 2026/09/07 22:50:16 by jodehii          ###   ########.fr       */
+/*   Updated: 2026/09/07 23:43:43 by jodehii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -104,27 +104,27 @@ char	*extra_apples(char *basket)
 
 char	*get_next_line(int fd)
 {
-	static char	*basket;
+	static char	*basket[1024];
 	char		*apples;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!basket)
+	if (!basket[fd])
 	{
-		basket = ft_strdup("");
-		if (!basket)
+		basket[fd] = ft_strdup("");
+		if (!basket[fd])
 			return (NULL);
 	}
-	basket = read_basket(fd, basket);
-	if (!basket)
+	basket[fd] = read_basket(fd, basket[fd]);
+	if (!basket[fd])
 		return (NULL);
-	if (basket[0] == '\0')
+	if (basket[fd][0] == '\0')
 	{
-		free(basket);
-		basket = NULL;
+		free(basket[fd]);
+		basket[fd] = NULL;
 		return (NULL);
 	}
-	apples = get_apples(basket);
-	basket = extra_apples(basket);
+	apples = get_apples(basket[fd]);
+	basket[fd] = extra_apples(basket[fd]);
 	return (apples);
 }
