@@ -12,20 +12,26 @@ Get Next Line is a function that allows you to read through file, one line at a 
 
 ### Instructions
 
-##### To create libft.a, run:
+##### Main function to run get_next_line:
 
-* `make`
-* `make all`
+```
+int	main(void)
+{
+	int		fd;
+	char	*line;
 
-##### To remove all object files/library, run:
-
-* `make clean`	- clear all (\*.o) files
-
-* `make fclean`	- clear all (\*.o) files and library
-
-##### To remake object files and library:
-
-* `make re`
+	fd = open("text.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
+}
+```
 
 ### Resources
 
